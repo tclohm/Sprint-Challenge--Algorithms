@@ -113,19 +113,33 @@ class SortingRobot:
         """
         # Fill this out
         #   the robot's "light" will be the indicator that our list is "sorted"
+        #
+        #
         #   robot always "start on the left side" and "picks up the first item"
         #   "if it can move right"
         #   "moves right" 
         #   "compares items"
-        #       if item held == 1 (1 means held item has a greater value)
+        #       if item held == 1 (1 means item held has a greater value)
         #           swap the items
         #   move left to position before 
         #   swap
         #   move to right
-
-        # once we get to the end of our list
-        # check to see if we can move left
-        # repeat the process 
+        #   repeat process
+        #
+        #   once we get to the end of our list
+        #   check to see if we can move left
+        #   "pick up item"
+        #   "move left"
+        #   "compare items"
+        #      if item held == -1 (-1 means item held has a lesser value)
+        #           swap items
+        #           turn on light to tell we are on our way back and sorting is occurring
+        #   "move right to position before"
+        #   "swap"
+        #   move to left
+        #   repeat process
+        #
+        #   break the cycle if light is off
         while True:
             self.set_light_off()
 
