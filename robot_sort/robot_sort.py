@@ -92,12 +92,71 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def move_compare_direction(self, direction, reverse_direction, value):
+        self.swap_item()
+        direction()
+
+        if self.compare_item() == value:
+            self.swap_item()
+            
+            if value == -1:
+                self.set_light_on()
+
+        reverse_direction()
+        self.swap_item()
+        direction()
+
+
     def sort(self):
         """
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        #   the robot's "light" will be the indicator that our list is "sorted"
+        #
+        #
+        #   robot always "start on the left side" and "picks up the first item"
+        #   "if it can move right"
+        #   "moves right" 
+        #   "compares items"
+        #       if item held == 1 (1 means item held has a greater value)
+        #           swap the items
+        #   move left to position before 
+        #   swap
+        #   move to right
+        #   repeat process
+        #
+        #   once we get to the end of our list
+        #   check to see if we can move left
+        #   "pick up item"
+        #   "move left"
+        #   "compare items"
+        #      if item held == -1 (-1 means item held has a lesser value)
+        #           swap items
+        #           turn on light to tell we are on our way back and sorting is occurring
+        #   "move right to position before"
+        #   "swap"
+        #   move to left
+        #   repeat process
+        #
+        #   break the cycle if light is off
+        while True:
+            self.set_light_off()
+
+            while self.can_move_right():
+
+                self.move_compare_direction(self.move_right, self.move_left, 1)
+
+                #print("right")
+
+            while self.can_move_left():
+
+                self.move_compare_direction(self.move_left, self.move_right, -1)
+
+                #print("left")
+
+            if self.light_is_on() == False:
+                return
 
 
 if __name__ == "__main__":
