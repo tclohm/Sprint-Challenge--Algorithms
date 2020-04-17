@@ -92,13 +92,65 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def move_compare_direction(self, direction, reverse_direction, value):
+        self.swap_item()
+        direction()
+
+        if self.compare_item() == value:
+            self.swap_item()
+            
+            if value == -1:
+                self.set_light_on()
+
+        reverse_direction()
+        self.swap_item()
+        direction()
+
+
     def sort(self):
         """
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        #   the robot's "light" will be the indicator that our list is "sorted"
+        #   robot always "start on the left side" and "picks up the first item"
+        #   "if it can move right"
+        #   "moves right" 
+        #   "compares items"
+        #       if item held == 1 (1 means held item has a greater value)
+        #           swap the items
+        #   move left to position before 
+        #   swap
+        #   move to right
 
+        # once we get to the end of our list
+        # check to see if we can move left
+        # repeat the process 
+        while True:
+            self.set_light_off()
+
+            while self.can_move_right():
+
+                self.move_compare_direction(self.move_right, self.move_left, 1)
+
+                #print("right")
+
+            while self.can_move_left():
+
+                self.move_compare_direction(self.move_left, self.move_right, -1)
+
+                #print("left")
+
+            if self.light_is_on() == False:
+                return
+
+
+
+l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+r = SortingRobot(l)
+r.sort()
+print("------")
+print(r._list)
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
